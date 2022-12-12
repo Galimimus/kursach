@@ -5,8 +5,7 @@
 работа с таблицами grades, employees, subjects
 
 восстановление пароля через почту сделать(отдельно)
-за айди класса брать название???
-переделать под аякс??-->
+доделать удаление-->
 
 <?php
 
@@ -16,9 +15,7 @@ function add_student($grade_name, $student_name){
     $link=db_connect();
     $pass = gen_password(8);
     $pass_hash = md5($pass);
-    $grade_id = $grade_name;
-    settype($grade_id, "int");
-    $sql = "INSERT INTO grades (grade_id, grade_name, student_name, password) VALUES ($grade_id, '$grade_name', '$student_name', '$pass_hash')";
+    $sql = "INSERT INTO grades (grade_name, student_name, password) VALUES ('$grade_name', '$student_name', '$pass_hash')";
     $result = mysqli_query($link,$sql);
 
         if ($result == false) {
@@ -33,9 +30,10 @@ function add_student($grade_name, $student_name){
 
 function add_teacher($name){
     $link=db_connect();
-    $pass = md5(gen_password(8));
+    $pass = gen_password(8);
+    $pass_hash = md5($pass);
     //$pass = md5("Password111");
-    $sql = "INSERT INTO employees (name, subjects_id, grades_id, password) VALUES ('$name', '', '', '$pass')";
+    $sql = "INSERT INTO employees (name, subjects_id, grades_id, password) VALUES ('$name', '', '', '$pass_hash')";
     $result = mysqli_query($link,$sql);
 
         if ($result == false) {
@@ -49,35 +47,101 @@ function add_teacher($name){
 }
 
 function remove_student($grade_name, $student_name){
+    $link=db_connect();
 
+    mysqli_close($link);
 }
 
 function remove_teacher($name){
+    $link=db_connect();
 
+    mysqli_close($link);
 }
 
-function add_subject_to_teacher(){
+function add_subject_to_teacher($teacher_name, $subject_name, $grade_name){
+    $link=db_connect();
+    $sql = "SELECT subjects_id FROM employees WHERE name='$teacher_name'";
+    $result = mysqli_query($link,$sql);
+    $row = mysqli_fetch_array($result);
+    $subjects = explode(" ", $row['subjects_id']);
+    $subjects_length = count($subjects);
+    $subjects_new = $row['subjects_id'];
+    $subjects_new .= " ";
 
+    $sql = "SELECT subject_id FROM subjects WHERE name='$subject_name' AND grade_name = '$grade_name'";
+    $result = mysqli_query($link,$sql);
+    $row = mysqli_fetch_array($result);
+    $subject_id = $row['subject_id'];
+    settype($subject_id, "string");
+
+    
+    for($i=0; $i<$subjects_length; $i++){
+        if(!strcmp($subjects[$i], $subject_id)){
+            mysqli_close($link);
+            return true;
+        }
+    }
+
+    $subjects_new .= $subject_id;
+    $sql = "UPDATE employees SET subjects_id='$subjects_new' WHERE name='$teacher_name'";
+    $result = mysqli_query($link,$sql);
+    $res = add_grade_to_teacher($teacher_name, $grade_name);
+    mysqli_close($link);
+    return $result && $res;
 }
 
 function remove_subject_from_teacher(){
+    $link=db_connect();
 
+    mysqli_close($link);
 }
 
-function add_grade_to_teacher(){
+function add_grade_to_teacher($teacher_name, $grade_name){
+    $link=db_connect();
+    $sql = "SELECT grades_id FROM employees WHERE name='$teacher_name'";
+    $result = mysqli_query($link,$sql);
+    $row = mysqli_fetch_array($result);
+    $grades = explode(" ", $row['grades_id']);
+    $grades_length = count($grades);
+    $grades_new = $row['grades_id'];
+    $grades_new .= " ";
+
+    for($i=0; $i<$grades_length; $i++){
+        if(!strcmp($grades[$i], $grade_name)){
+            mysqli_close($link);
+            return true;
+        }
+    }
+
+    $grades_new .= $grade_name;
+    $sql = "UPDATE employees SET grades_id='$grades_new' WHERE name='$teacher_name'";
+    $result = mysqli_query($link,$sql);
+
+    mysqli_close($link);
+    return $result;
 
 }
 
 function remove_grade_from_teacher(){
+    $link=db_connect();
 
+    mysqli_close($link);
 }
 
-function add_subject(){
+function add_subject($subject, $grade){
+    $link=db_connect();
 
+    $sql = "INSERT INTO subjects (name, grade_name) VALUES ('$subject', '$grade')";
+    $result = mysqli_query($link,$sql);
+    mysqli_close($link);
+
+    return $result;
 }
 
 function remove_subject(){
+    $link=db_connect();
 
+    mysqli_close($link);
 }
 
 function db_connect(){
