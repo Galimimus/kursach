@@ -2,7 +2,7 @@
 include '/var/www/html/lk/kursach/db/admin.php';
 
 switch ($_GET['q']){
-    case "1"://subjects
+    case "1"://subjects 
         $link = db_connect();
         $sql = "SELECT * FROM subjects";
         $result = mysqli_query($link,$sql);

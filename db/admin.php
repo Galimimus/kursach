@@ -20,14 +20,14 @@ function add_student($grade_name, $student_name){
 
         if ($result == false) {
 
-            print("Произошла ошибка при выполнении запроса");
+            $pass = "Произошла ошибка при выполнении запроса";
 
         }  
 
     mysqli_close($link);
     return $pass;
 }
-
+ 
 function add_teacher($name){
     $link=db_connect();
     $pass = gen_password(8);
@@ -38,7 +38,7 @@ function add_teacher($name){
 
         if ($result == false) {
 
-            print("Произошла ошибка при выполнении запроса");
+            $pass = "Произошла ошибка при выполнении запроса";
 
         }  
 
@@ -66,7 +66,7 @@ function add_subject_to_teacher($teacher_name, $subject_name, $grade_name){
     $subjects = explode(" ", $row['subjects_id']);
     $subjects_length = count($subjects);
     $subjects_new = $row['subjects_id'];
-    $subjects_new .= " ";
+    $subjects_new .= "x";
 
     $sql = "SELECT subject_id FROM subjects WHERE name='$subject_name' AND grade_name = '$grade_name'";
     $result = mysqli_query($link,$sql);

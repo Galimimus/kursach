@@ -16,7 +16,7 @@ switch ($_GET['q']){
                             <label>класс</label>
                             </td>
                             <td>
-                                <input type="text" id="grade" class="form-control" placeholder="1а" required/>
+                                <input type="text" id="grade" class="form-control" placeholder="1a" required/>
                             </td>
                         </div>
                     </tr>
@@ -32,7 +32,7 @@ switch ($_GET['q']){
                     </tr>
                     <tr>
                         <td colspan = "2">
-                            <input type="submit" value="Добавить" class="btn btn-primary" name="add_student" onclick=changedb("add_student")></input>
+                            <input type="button" value="Добавить" class="btn btn-primary" name="add_student" onclick=changedb("add_student")></input>
                         </td>
                     </tr>
                 </table>
@@ -99,7 +99,7 @@ switch ($_GET['q']){
                 </tr>
                 <tr>
                     <td colspan = "2">
-                        <input type="submit" value="Добавить" class="btn btn-primary" name="add_subject" onclick=changedb("add_subject")></input>
+                        <input type="button" value="Добавить" class="btn btn-primary" name="add_subject" onclick=changedb("add_subject")></input>
                     </td>
                 </tr>
             </table>
@@ -148,7 +148,7 @@ switch ($_GET['q']){
                 </tr>
                 <tr>
                     <td colspan = "2">
-                        <input type="submit" value="Добавить" class="btn btn-primary" name="add_subject_to_teacher" onclick=changedb("add_subject_to_teacher")></input>
+                        <input type="button" value="Добавить" class="btn btn-primary" name="add_subject_to_teacher" onclick=changedb("add_subject_to_teacher")></input>
                     </td>
                 </tr>
             </table>
@@ -159,7 +159,7 @@ switch ($_GET['q']){
 
 
 
-
+ 
 <!-- 
     
 ДОБАВЛЕНИЕ ФОРМ!!!!

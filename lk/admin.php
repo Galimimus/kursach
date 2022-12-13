@@ -72,6 +72,14 @@
                 background-color: #f8f8f8;
                 font-size: 16px;
             }
+
+            .msg{
+                color: black;
+                font-size: 16px;
+                margin-top:5%;
+                margin-left: 5%;
+
+            }
         </style>
         <script>
 function showForm(str) {
@@ -97,7 +105,7 @@ function changedb(str) {
   } else {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
+      if (this.readyState==4 && this.status == 200) {
         document.getElementById("msg").innerHTML = this.responseText;
       }
     };
@@ -134,6 +142,7 @@ function showInfo(str) {
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     </head>
     <body>
+
                     <div class="split left">
                         <div class="top">
                             <label class="block1">Вы вошли как admin</label>
@@ -149,10 +158,10 @@ function showInfo(str) {
                             </select>
                         </form>
                         <div id="txtForm"></div>
-                        <p id="msg"></p>
+                        <div id="msg" class="msg"></div>
                     </div>
                     <div class="split right">
-                        <div class="top">
+                        <div class="top btn-group-justified">
                         <form>
                         <input type="button" value="Предметы" class="btn btn-primary" onclick=showInfo(<?php echo '"1"';?>)>
                         <input type="button" value="Учителя" class="btn btn-primary" onclick=showInfo(<?php echo '"2"';?>)>
