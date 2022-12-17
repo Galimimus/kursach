@@ -1,3 +1,12 @@
+<?php
+session_start();
+/*
+
+ДОДЕЛАТЬ ОБРАБОТКУ НАЖАТИЯ НА ЗАДАНИЕ
+С CSS НАДО БУДЕТ ПОИГРАТЬСЯ
+
+*/
+?>
 <!DOCTYPE html>
 <html lang="ru">
     <head>
@@ -7,7 +16,7 @@
             
             .split {
             height: 100%;
-            width: 50%;
+            width: 70%;
             position: fixed;
             z-index: 1;
             top: 0;
@@ -63,11 +72,10 @@
             }
 
             .msg{
-                color: black;
+                color: red;
                 font-size: 16px;
-                margin-top:5%;
-                margin-left: 5%;
-
+                margin-top:3%;
+                margin-left: 50%;
             }
             .input1{
                 outline: none;
@@ -79,7 +87,29 @@
 
             }
         </style>
-        <script>
+
+<script>
+
+
+
+function settasksgrades(str, val) {
+  if (str.length == 0) {
+    document.getElementById("msgt").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState==4 && this.status == 200) {
+        document.getElementById("msgt").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET", "/lk/kursach/db/gradebook.php?q=" + str + val, true);
+    xmlhttp.send();
+  }
+}
+
+
+
 function teacherchangedb(str){
 if (str.length == 0) {
     document.getElementById("exercise").innerHTML = "";
@@ -105,6 +135,9 @@ if (str.length == 0) {
     xmlhttp.send();
   }
 }
+
+
+
 function changesubject(str) {
   if (str.length == 0) {
     document.getElementById("tableForm").innerHTML = "";
@@ -120,6 +153,8 @@ function changesubject(str) {
     xmlhttp.send();
   }
 }
+
+
 
 function showSubjects(str) {
   if (str.length == 0) {
@@ -137,19 +172,29 @@ function showSubjects(str) {
     xmlhttp.send();
   }
 }
-</script>
-<?php
-session_start();
-/*function changeExerciseInfo($str){
-$_SESSION['exercise_name'] = $str;
-header("Location: http://localhost/lk/kursach/lk/exercise.php");
+
+
+
+function changeExerciseInfo(str){
+if (str.length == 0) {
+    document.getElementById("exerciseInfo").innerHTML = "";
+    return;
+} else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState==4 && this.status == 200) {
+        document.getElementById("exerciseInfo").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET", "/lk/kursach/db/exercise.php?q=" + str, true);
+    xmlhttp.send();
+  }
 }
 
-ДОДЕЛАТЬ ОБРАБОТКУ НАЖАТИЯ НА ЗАДАНИЕ
-С CSS НАДО БУДЕТ ПОИГРАТЬСЯ
 
-*/
-?>
+
+</script>
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     </head>
     <body>
@@ -162,14 +207,22 @@ header("Location: http://localhost/lk/kursach/lk/exercise.php");
                         <form>
                             <input type="button" value="Предметы" class="btn btn-primary" onclick=showSubjects(<?php echo '"'.$_SESSION["subjects_id"].'"';?>)>
                         </form>
-                        <form>
                         <div id="txtForm"></div>
-                        </form>
                         </div>
                     </div>
                     <div class="split right">
+                        <form>
                         <div id="tableForm"></div>
-                        <div id="exercise"></div>
+                        </form>
+                        
+                                <form>
+                                <div id="exercise"></div>
+                                </form>
+                                
+                                <div id="exerciseInfo"></div>
+                                <div id="msgt"></div>
+
+                                
                     </div>   
   </body>
 </html>

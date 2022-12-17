@@ -19,6 +19,7 @@ $result = mysqli_query($link,$sql);
         <input type="button" value="Добавить задание" class="btn btn-primary" form="add_exersize" onclick=teacherchangedb("add_exersize")>
     </div>';
     foreach($result as $row){
-            echo '<input type="button" value="'.$row['name'].'" class="btn btn-primary" onclick=changeExerciseInfo("'.$row['name'].'")></br>';
+            echo '<input type="button" value="'.$row['name'].'" class="btn btn-primary" onclick=changeExerciseInfo("'.$row['name'].'&ex_id='.$row['exercise_id'].'")></br>';
     }
     echo "</div>";
+mysqli_close($link);
