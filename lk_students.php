@@ -35,10 +35,20 @@
                 <tr>
                     <div class="form-group">
                         <td>
+                            <label>Класс</label>
+                        </td>
+                        <td>
+                            <input type="text" placeholder="1a" name="grade" class="form-control" required/>
+                        </td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="form-group">
+                        <td>
                             <label>ФИО</label>
                         </td>
                         <td>
-                            <input type="text" name="fio" class="form-control" required/>
+                            <input type="text" name="fio" placeholder="Иванов Иван Иванович" class="form-control" required/>
                         </td>
                     </div>
                 </tr>
@@ -48,9 +58,9 @@
                             <label for="pwd">Пароль</label>
                         </td>
                         <td>
-                            <input type="password" name="pass" class="form-control" maxlength="30" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            <input type="password" name="pass" class="form-control" maxlength="30" 
                              title="Пароль должен быть введен на английском языке, содержать не менее 8 символов и не более 30, буквы верхнего и нижнего регистра, как минимум одну цифру."
-                              required/>
+                              required/><!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"-->
                         </td>
                     </div>
                 </tr>

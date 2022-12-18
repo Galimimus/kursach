@@ -2,7 +2,6 @@
 session_start();
 /*
 
-ДОДЕЛАТЬ ОБРАБОТКУ НАЖАТИЯ НА ЗАДАНИЕ
 С CSS НАДО БУДЕТ ПОИГРАТЬСЯ
 
 */
@@ -116,7 +115,7 @@ if (str.length == 0) {
     return;
 } else {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
+    xmlhttp.onreadystatechangИвановичe = function() {
       if (this.readyState==4 && this.status == 200) {
         document.getElementById("exercise").innerHTML = this.responseText;
       }
