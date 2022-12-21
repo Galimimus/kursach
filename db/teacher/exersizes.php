@@ -15,3 +15,5 @@ function add_exersize($subject_id, $text, $name, $teacher_id){
     
     return $pass;
 }
+
+//ДОБАВИТЬ ФУНКЦИЮ УДАЛЕНИЯ ЗАДАНИЯ!!!!!!!

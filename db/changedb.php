@@ -1,8 +1,8 @@
 <?php 
 //обработка дефолта!!!
 //Добавление отправки сообщений об успехе\ошибке
-include '/var/www/html/lk/kursach/db/admin.php';
-include '/var/www/html/lk/kursach/db/exersizes.php';
+include '/var/www/html/lk/kursach/db/admin/admin.php';
+include '/var/www/html/lk/kursach/db/teacher/exersizes.php';
  
 switch ($_GET['q']){
     case "add_student":

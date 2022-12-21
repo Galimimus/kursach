@@ -1,0 +1,204 @@
+   table {
+    width: 500px;
+    margin-left: 5%; 
+    border-spacing: 10px 20px;
+   }
+
+   td {
+    padding: 5px; 
+    font: caption;
+    font-size: 16px;
+    text-align: center;
+   }
+
+   .split_student {
+    height: 100%;
+    width: 75%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+   }
+
+   .left {
+   left: 0;
+   }
+
+   .right {
+   right: 0;
+   background-color: #ccc;
+   }
+
+   .top{
+   position: absolute;
+   top: 5%;
+   left: 5%;
+   text-align: center;
+   }
+
+   label{
+       color: rgb(6, 119, 211);
+       margin-top: 20px;
+       margin-bottom: 20%;
+       margin-right: 10px;
+   }
+
+   .info{
+       font: caption;
+       color: black;
+       font-size: 16px;
+
+   }
+
+   .exit{
+        color: rgb(27, 145, 241);
+        font-size: 16px;
+        font: caption;
+   }
+
+   .btn_student_exercises{
+        width: 30%;
+        font: caption;
+       color: rgb(255, 253, 253);
+       background-color: rgb(27, 145, 241);
+       font-size: 16px;
+        border: 2px solid rgb(22, 135, 228);
+        border-radius: 4px;
+       margin-top:7%;
+       margin-left:1%;
+       height: 40px;
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+   .split_employee {
+    height: 100%;
+    width: 70%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+    }
+
+    .top_right{
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        text-align: center;
+    }
+
+
+    .list_of_subjects{
+        padding: 5px; 
+        margin-top:10%;
+        margin-left: 0;
+        outline: none;
+        width: 30%;
+        font-size: 16px;
+    }
+
+    .select_task_grade{
+        padding: 5px; 
+        margin-top:5%;
+        margin-left: 5%;
+        outline: none;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+    }
+
+    .input_text{
+        outline: none;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        resize: none
+    }
+
+    .show_text{
+        margin-top:3%;
+        outline: none;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #e6e3e3;
+        font-size: 16px;
+        resize: none
+    }
+
+    .input_small_text{
+        padding: 5 px;
+        outline: none;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        width: 98%;
+        background-color: #f8f8f8;
+        font-size: 18px;
+        resize: none
+    }
+
+    .btn_show_subjects{
+        width: 139%;
+        height: 40px;
+        font: caption;
+       background-color: rgb(27, 145, 241);
+       color: rgb(255, 253, 253);
+       border-radius: 4px;
+       border: 2px solid rgb(22, 135, 228);
+       font-size: 16px;
+       margin-top:6%;
+       margin-left:1%;
+   }
+
+
+   .btn_subject{
+    width: 139%;
+    font: caption;
+    height: 40px;
+    border: 2px solid #ccc;
+   font-size: 16px;
+   margin-top:1%;
+   margin-left:1%;
+}
+
+
+.btn_submit{
+    width: 60%;
+    font: caption;
+    border: 2px solid rgb(6, 148, 13);
+    background-color: rgb(6, 148, 13);
+    border-radius: 4px;
+    height: 40px;
+    padding: 5 px;
+    color:white;
+   font-size: 18px;
+   margin-top:1%;
+   margin-bottom:1%;
+   margin-left:1%;
+}
+
+
+.btn_teacher_exercises{
+    border-radius: 4px;
+    padding-top: 10 px;
+    padding-bottom: 10 px;
+    height: 40px;
+    width: 98%;
+    font: caption;
+    border: 2px solid rgb(184, 179, 179);
+   font-size: 16px;
+   margin-top:1%;
+   margin-left:1%;
+}

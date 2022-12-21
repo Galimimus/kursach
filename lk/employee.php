@@ -1,91 +1,17 @@
 <?php
 session_start();
-/*
-
-С CSS НАДО БУДЕТ ПОИГРАТЬСЯ
-
-*/
+if ($_SESSION["session"]!="1"){
+    $_SESSION["msg"] = "У вас нет прав доступа";
+    header("Location: http://localhost/lk/kursach/index.php", true, 303);
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="ru">
     <head>
         <meta charset="UTF-8">
         <title>signup</title>
-        <style>
-            
-            .split {
-            height: 100%;
-            width: 70%;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            overflow-x: hidden;
-            padding-top: 20px;
-            }
-
-            .left {
-            left: 0;
-            }
-
-            .right {
-            right: 0;
-            background-color: #ccc;
-            }
-
-
-            .top{
-            position: absolute;
-            top: 3%;
-            left: 5%;
-            text-align: center;
-            }
-
-            label{
-                color: blue;
-                margin-top: 20px;
-                margin-bottom: 20px;
-                margin-right: 10px;
-            }
-
-            .block1{
-                color: black;
-
-            }
-            .select_action{
-                padding: 5px; 
-                margin-top:10%;
-                margin-left: 0;
-                outline: none;
-                width: 30%;
-                font-size: 16px;
-            }
-            .select_db{
-                padding: 5px; 
-                margin-top:5%;
-                margin-left: 5%;
-                outline: none;
-                border: 2px solid #ccc;
-                border-radius: 4px;
-                background-color: #f8f8f8;
-                font-size: 16px;
-            }
-
-            .msg{
-                color: red;
-                font-size: 16px;
-                margin-top:3%;
-                margin-left: 50%;
-            }
-            .input1{
-                outline: none;
-                border: 2px solid #ccc;
-                border-radius: 4px;
-                background-color: #f8f8f8;
-                font-size: 16px;
-                resize: none
-
-            }
-        </style>
+        <link rel="stylesheet" href="/lk/kursach/style.css" type="text/css"/>
 
 <script>
 
@@ -102,7 +28,7 @@ function settasksgrades(str, val) {
         document.getElementById("msgt").innerHTML = this.responseText;
       }
     };
-    xmlhttp.open("GET", "/lk/kursach/db/gradebook.php?q=" + str + val, true);
+    xmlhttp.open("GET", "/lk/kursach/db/teacher/gradebook.php?q=" + str + val, true);
     xmlhttp.send();
   }
 }
@@ -115,7 +41,7 @@ if (str.length == 0) {
     return;
 } else {
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechangИвановичe = function() {
+    xmlhttp.onreadystatechange = function() {
       if (this.readyState==4 && this.status == 200) {
         document.getElementById("exercise").innerHTML = this.responseText;
       }
@@ -148,7 +74,7 @@ function changesubject(str) {
         document.getElementById("tableForm").innerHTML = this.responseText;
       }
     };
-    xmlhttp.open("GET", "/lk/kursach/db/changesubject.php?q=" + str, true);
+    xmlhttp.open("GET", "/lk/kursach/db/teacher/changesubject.php?q=" + str, true);
     xmlhttp.send();
   }
 }
@@ -167,7 +93,7 @@ function showSubjects(str) {
       }
     };
 
-    xmlhttp.open("GET", "/lk/kursach/db/teachers.php?q=" + str, true);
+    xmlhttp.open("GET", "/lk/kursach/db/teacher/show_subjects.php?q=" + str, true);
     xmlhttp.send();
   }
 }
@@ -185,7 +111,7 @@ if (str.length == 0) {
         document.getElementById("exerciseInfo").innerHTML = this.responseText;
       }
     };
-    xmlhttp.open("GET", "/lk/kursach/db/exercise.php?q=" + str, true);
+    xmlhttp.open("GET", "/lk/kursach/db/teacher/exercise.php?q=" + str, true);
     xmlhttp.send();
   }
 }
@@ -193,23 +119,21 @@ if (str.length == 0) {
 
 
 </script>
-
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     </head>
     <body>
-                    <div class="split left">
+                    <div class="split_employee left">
                         <div class="top">
-                            <label class="block1">Вы вошли как <?php echo $_SESSION['name'];?></label>
-                            <a href="/lk/kursach/index.php">Выйти</a>
+                            <label class="info">Вы вошли как <?php echo $_SESSION['name'];?></label>
+                            <a href="/lk/kursach/index.php" class="exit" onclick="<?php session_destroy();?>">Выйти</a>
                         </div>
-                        <div class="select_action btn-group-vertical">
+                        <div class="list_of_subjects">
                         <form>
-                            <input type="button" value="Предметы" class="btn btn-primary" onclick=showSubjects(<?php echo '"'.$_SESSION["subjects_id"].'"';?>)>
+                            <input type="button" value="Предметы" class="btn_show_subjects" onclick=showSubjects(<?php echo '"'.$_SESSION["subjects_id"].'"';?>)>
                         </form>
                         <div id="txtForm"></div>
                         </div>
                     </div>
-                    <div class="split right">
+                    <div class="split_employee right">
                         <form>
                         <div id="tableForm"></div>
                         </form>

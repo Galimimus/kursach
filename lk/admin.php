@@ -1,3 +1,11 @@
+<?php
+session_start();
+if ($_SESSION["session"]!="0"){
+    $_SESSION["msg"] = "У вас нет прав доступа";
+    header("Location: http://localhost/lk/kursach/index.php", true, 303);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
     <head>
@@ -134,7 +142,7 @@ function showInfo(str) {
         document.getElementById("tableForm").innerHTML = this.responseText;
       }
     };
-    xmlhttp.open("GET", "/lk/kursach/db/gettable.php?q=" + str, true);
+    xmlhttp.open("GET", "/lk/kursach/db/admin/gettable.php?q=" + str, true);
     xmlhttp.send();
   }
 }
@@ -146,7 +154,7 @@ function showInfo(str) {
                     <div class="split left">
                         <div class="top">
                             <label class="block1">Вы вошли как admin</label>
-                            <a href="/lk/kursach/index.php">Выйти</a>
+                            <a href="/lk/kursach/index.php" onclick="<?php session_destroy();?>">Выйти</a>
                         </div>
                         <form>
                             <select name="select1" class="select_action" onchange="showForm(this.value)">

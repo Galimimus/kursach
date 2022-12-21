@@ -1,5 +1,5 @@
 <?php
-include '/var/www/html/lk/kursach/db/admin.php';
+include '/var/www/html/lk/kursach/db/admin/admin.php';
 
 switch ($_GET['q']){
     case "1"://subjects 
