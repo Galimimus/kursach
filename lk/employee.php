@@ -61,7 +61,7 @@ if (str.length == 0) {
   }
 }
 
-
+ 
 
 function changesubject(str) {
   if (str.length == 0) {
