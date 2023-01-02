@@ -1,11 +1,17 @@
 <?php
-include '/var/www/html/lk/kursach/db/admin/admin.php';
+
+
+include_once '/var/www/html/lk/kursach/db/db_connect.php';
+include_once '/var/www/html/lk/kursach/db/alerts/alerts.php';
 
 switch ($_GET['q']){
     case "1"://subjects 
         $link = db_connect();
         $sql = "SELECT * FROM subjects";
         $result = mysqli_query($link,$sql);
+
+        alert_error($result, "Произошла ошибка при выполнении запроса к таблице subjects");
+
         echo "<table>";
             echo "<tr>";
                 echo "<td><b>ID предмета(subject_id)</b></td>";
@@ -28,6 +34,9 @@ switch ($_GET['q']){
         $link = db_connect();
         $sql = "SELECT * FROM employees";
         $result = mysqli_query($link,$sql);
+
+        alert_error($result, "Произошла ошибка при выполнении запроса к таблице employees");
+
         echo "<table>";
             echo "<tr>";
                     echo "<td><b>ID сотрудника(id)</b></td>";
@@ -52,6 +61,9 @@ switch ($_GET['q']){
         $link = db_connect();
         $sql = "SELECT * FROM grades";
         $result = mysqli_query($link,$sql);
+
+        alert_error($result, "Произошла ошибка при выполнении запроса к таблице grades");
+
         echo "<table>";
         echo "<tr>";
                 echo "<td><b>Класс(grade_name)</b></td>";
@@ -70,6 +82,6 @@ switch ($_GET['q']){
         $result->free();
         break;
     default:
-        echo "badidabudai";
+        echo "Ошибка: Неизвестный запрос";
         break;
 }

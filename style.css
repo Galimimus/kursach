@@ -1,4 +1,10 @@
-   table {
+  
+  /* 
+  TODO: поправить стили
+  */
+  
+  
+  table {
     width: 500px;
     margin-left: 5%; 
     border-spacing: 10px 20px;
@@ -200,5 +206,64 @@
     border: 2px solid rgb(184, 179, 179);
    font-size: 16px;
    margin-top:1%;
+   margin-left:1%;
+}
+
+
+
+
+
+/*ДОДЕЛАТЬ CSS(ДОБАВИТЬ КЛАССЫ В ADMIN.PHP*/
+
+   .split_admin {
+   height: 100%;
+   width: 50%;
+   position: fixed;
+   z-index: 1;
+   top: 0;
+   overflow-x: hidden;
+   padding-top: 20px;
+   }
+
+   .select_action{
+       padding: 5px; 
+       margin-top:10%;
+       margin-left: 5%;
+       outline: none;
+       border: 2px solid #ccc;
+       border-radius: 4px;
+       background-color: #f8f8f8;
+       font-size: 16px;
+   }
+
+   .select_db{
+       padding: 5px; 
+       margin-top:5%;
+       margin-left: 5%;
+       outline: none;
+       border: 2px solid #ccc;
+       border-radius: 4px;
+       background-color: #f8f8f8;
+       font-size: 16px;
+   }
+
+   .msg{
+       color: black;
+       font-size: 16px;
+       margin-top:5%;
+       margin-left: 5%;
+
+   }
+
+   .btn_dbs{
+    width: 139%;
+    height: 40px;
+    font: caption;
+   background-color: rgb(27, 145, 241);
+   color: rgb(255, 253, 253);
+   border-radius: 4px;
+   border: 2px solid rgb(22, 135, 228);
+   font-size: 16px;
+   margin-top:6%;
    margin-left:1%;
 }

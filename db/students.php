@@ -2,7 +2,7 @@
 <?php
 session_start();
 
-include '/var/www/html/lk/kursach/db/admin.php';
+include '/var/www/html/lk/kursach/db/admin/admin.php';
 $pass = $_POST['pass'];
 $fio = $_POST['fio'];
 $grade_name = $_POST['grade'];
@@ -18,7 +18,6 @@ if ($row === "") {
 
     mysqli_close($link);
     header("Location: http://localhost/lk/kursach/index.php");
-
 
 }else{
 
@@ -37,3 +36,4 @@ if ($row === "") {
 
     }
 }
+?>

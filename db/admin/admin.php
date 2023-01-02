@@ -7,12 +7,13 @@
 восстановление пароля через почту сделать(отдельно)
 доделать удаление
 
-db_connect()-перенести в другой файл??
 генерацию пароля переделать-->
 
 <?php
 
 
+include_once '/var/www/html/lk/kursach/db/db_connect.php';
+include_once '/var/www/html/lk/kursach/db/alerts/alerts.php';
 
 function add_student($grade_name, $student_name){
     $link=db_connect();
@@ -21,29 +22,22 @@ function add_student($grade_name, $student_name){
     $sql = "INSERT INTO grades (grade_name, student_name, password) VALUES ('$grade_name', '$student_name', '$pass_hash')";
     $result = mysqli_query($link,$sql);
 
-        if ($result == false) {
-
-            $pass = "Произошла ошибка при выполнении запроса";
-
-        }  
+    $err = alert_error($result, "Произошла ошибка при выполнении запроса к таблице grades");
 
     mysqli_close($link);
+    echo $err;
     return $pass;
 }
  
 function add_teacher($name){
     $link=db_connect();
-    $pass = gen_password(8);
+    $pass = gen_password();
     $pass_hash = md5($pass);
     //$pass = md5("Password111");
     $sql = "INSERT INTO employees (name, subjects_id, grades_id, password) VALUES ('$name', '', '', '$pass_hash')";
     $result = mysqli_query($link,$sql);
 
-        if ($result == false) {
-
-            $pass = "Произошла ошибка при выполнении запроса";
-
-        }  
+    alert_error($result, "Произошла ошибка при выполнении запроса к таблице employees");
 
     mysqli_close($link);
     return $pass;
@@ -52,11 +46,17 @@ function add_teacher($name){
 function remove_student($grade_name, $student_name){
     $link=db_connect();
 
+    //TODO: удаление из таблицы grades
+    //this code will remove student_name from grades where grade_name = $grade_name
+    $sql = "SELECT student_name FROM grades WHERE grade_name='$grade_name'";
+
     mysqli_close($link);
 }
 
 function remove_teacher($name){
     $link=db_connect();
+
+    //TODO: удаление из таблицы employees
 
     mysqli_close($link);
 }
@@ -65,6 +65,10 @@ function add_subject_to_teacher($teacher_name, $subject_name, $grade_name){
     $link=db_connect();
     $sql = "SELECT subjects_id FROM employees WHERE name='$teacher_name'";
     $result = mysqli_query($link,$sql);
+
+    alert_error($result, "Произошла ошибка при выполнении запроса к таблице employees");
+
+
     $row = mysqli_fetch_array($result);
     $subjects = explode(" ", $row['subjects_id']);
     $subjects_length = count($subjects);
@@ -73,6 +77,9 @@ function add_subject_to_teacher($teacher_name, $subject_name, $grade_name){
 
     $sql = "SELECT subject_id FROM subjects WHERE name='$subject_name' AND grade_name = '$grade_name'";
     $result = mysqli_query($link,$sql);
+
+    alert_error($result, "Произошла ошибка при выполнении запроса к таблице subjects");
+
     $row = mysqli_fetch_array($result);
     $subject_id = $row['subject_id'];
     settype($subject_id, "string");
@@ -88,6 +95,9 @@ function add_subject_to_teacher($teacher_name, $subject_name, $grade_name){
     $subjects_new .= $subject_id;
     $sql = "UPDATE employees SET subjects_id='$subjects_new' WHERE name='$teacher_name'";
     $result = mysqli_query($link,$sql);
+
+    alert_error($result, "Произошла ошибка при выполнении запроса к таблице employees");
+
     $res = add_grade_to_teacher($teacher_name, $grade_name);
     mysqli_close($link);
     return $result && $res;
@@ -147,30 +157,32 @@ function remove_subject(){
     mysqli_close($link);
 }
 
-function db_connect(){
-    $link = mysqli_connect('localhost', 'galimimus', 'pass111','kursach');
-    if ($link == false){
-        print("Ошибка: Невозможно подключиться к MySQL " . mysqli_connect_error());
-    }
-    
-    mysqli_set_charset($link, "utf8");
-    return $link;
-}
 
-function gen_password($length = 6)
+ 
+function gen_password($length = 8)
 {
 	$password = '';
 	$arr = array(
-		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 
-		'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 
-		'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 
-		'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 
+		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+		'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+		'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+		'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 		'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
-	);
- 
-	for ($i = 0; $i < $length; $i++) {
-		$password .= $arr[random_int(0, count($arr) - 1)];
-	}
+	);  
+	$pass = array();
+	$pass[] = $arr[random_int(0, count($arr) - 1)];
+	$pass[] = $arr[random_int(0, count($arr) - 1)];
+	$pass[] = $arr[random_int(0, count($arr) - 1)];
+	$pass[] = $arr[random_int(0, count($arr) - 1)];
+	$pass[] = $arr[random_int(0, count($arr) - 1)];
+	$pass[] = $arr[random_int(0, count($arr) - 1)];
+	$pass[] = $arr[random_int(count($arr) - 37, count($arr) - 11)];
+	$pass[] = $arr[random_int(count($arr) - 11, count($arr) - 1)];
+	shuffle($pass);
+	$password = implode($pass);
 	return $password;
 }
- 
+
+
+
+

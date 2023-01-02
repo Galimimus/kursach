@@ -1,25 +1,27 @@
 
-<!--реализовать вход в лк
-добавить передачу сообщений об ошибках и тд
-ДОБАВИТЬ СЕССИИ-->
-
 <?php
-include '/var/www/html/lk/kursach/db/admin.php';
+
+include_once '/var/www/html/lk/kursach/db/db_connect.php';
+include_once '/var/www/html/lk/kursach/db/alerts/errors.php';
+
+
 $pass = $_POST['pass'];
 $fio = $_POST['fio'];
 $pass = md5($pass);
 $link = db_connect();
 $sql = "SELECT * FROM employees WHERE name='$fio'";
 $result = mysqli_query($link,$sql);
+
+alert_error($result, "Произошла ошибка при выполнении запроса к таблице employees");
+
 $row = mysqli_fetch_array($result);
 
 session_start();
 
 if ($row === "") {
-
     mysqli_close($link);
-        header("Location: http://localhost/lk/kursach/index.php");
-
+    alert_error(false, "Пользователь не найден");
+    header("Location: http://localhost/lk/kursach/index.php");
 
 }else{
 
@@ -27,7 +29,6 @@ if ($row === "") {
         mysqli_close($link);
         if(!strcmp($fio, "admin")){
             $_SESSION["session"] = "0";
-
             header("Location: http://localhost/lk/kursach/lk/admin.php");
         }
         else{
@@ -40,6 +41,7 @@ if ($row === "") {
         }
     }else{
         mysqli_close($link);
+        alert_error(false, "Неверный пароль");
         header("Location: http://localhost/lk/kursach/index.php");
 
     }
