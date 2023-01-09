@@ -13,7 +13,6 @@
 
 
 include_once '/var/www/html/lk/kursach/db/db_connect.php';
-include_once '/var/www/html/lk/kursach/db/alerts/alerts.php';
 
 function add_student($grade_name, $student_name){
     $link=db_connect();
@@ -22,10 +21,8 @@ function add_student($grade_name, $student_name){
     $sql = "INSERT INTO grades (grade_name, student_name, password) VALUES ('$grade_name', '$student_name', '$pass_hash')";
     $result = mysqli_query($link,$sql);
 
-    $err = alert_error($result, "Произошла ошибка при выполнении запроса к таблице grades");
 
     mysqli_close($link);
-    echo $err;
     return $pass;
 }
  
@@ -37,7 +34,6 @@ function add_teacher($name){
     $sql = "INSERT INTO employees (name, subjects_id, grades_id, password) VALUES ('$name', '', '', '$pass_hash')";
     $result = mysqli_query($link,$sql);
 
-    alert_error($result, "Произошла ошибка при выполнении запроса к таблице employees");
 
     mysqli_close($link);
     return $pass;
@@ -66,7 +62,6 @@ function add_subject_to_teacher($teacher_name, $subject_name, $grade_name){
     $sql = "SELECT subjects_id FROM employees WHERE name='$teacher_name'";
     $result = mysqli_query($link,$sql);
 
-    alert_error($result, "Произошла ошибка при выполнении запроса к таблице employees");
 
 
     $row = mysqli_fetch_array($result);
@@ -78,7 +73,6 @@ function add_subject_to_teacher($teacher_name, $subject_name, $grade_name){
     $sql = "SELECT subject_id FROM subjects WHERE name='$subject_name' AND grade_name = '$grade_name'";
     $result = mysqli_query($link,$sql);
 
-    alert_error($result, "Произошла ошибка при выполнении запроса к таблице subjects");
 
     $row = mysqli_fetch_array($result);
     $subject_id = $row['subject_id'];
@@ -96,7 +90,6 @@ function add_subject_to_teacher($teacher_name, $subject_name, $grade_name){
     $sql = "UPDATE employees SET subjects_id='$subjects_new' WHERE name='$teacher_name'";
     $result = mysqli_query($link,$sql);
 
-    alert_error($result, "Произошла ошибка при выполнении запроса к таблице employees");
 
     $res = add_grade_to_teacher($teacher_name, $grade_name);
     mysqli_close($link);

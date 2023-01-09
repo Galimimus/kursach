@@ -2,7 +2,6 @@
 <?php
 
 include_once '/var/www/html/lk/kursach/db/db_connect.php';
-include_once '/var/www/html/lk/kursach/db/alerts/errors.php';
 
 
 $pass = $_POST['pass'];
@@ -12,7 +11,6 @@ $link = db_connect();
 $sql = "SELECT * FROM employees WHERE name='$fio'";
 $result = mysqli_query($link,$sql);
 
-alert_error($result, "Произошла ошибка при выполнении запроса к таблице employees");
 
 $row = mysqli_fetch_array($result);
 
@@ -20,7 +18,6 @@ session_start();
 
 if ($row === "") {
     mysqli_close($link);
-    alert_error(false, "Пользователь не найден");
     header("Location: http://localhost/lk/kursach/index.php");
 
 }else{
@@ -41,7 +38,6 @@ if ($row === "") {
         }
     }else{
         mysqli_close($link);
-        alert_error(false, "Неверный пароль");
         header("Location: http://localhost/lk/kursach/index.php");
 
     }

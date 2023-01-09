@@ -1,4 +1,5 @@
 <?php
+include_once '/var/www/html/lk/kursach/db/db_connect.php';
 function add_exersize($subject_id, $text, $name, $teacher_id){
 
     $link=db_connect();

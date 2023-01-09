@@ -76,7 +76,7 @@ function showInfo(str) {
     <div class="split_admin left">
         <div class="top">
             <label class="info">Вы вошли как admin</label>
-            <a href="/lk/kursach/index.php" onclick="<?php session_destroy();?>">Выйти</a>
+            <a href="/lk/kursach/db/logout.php">Выйти</a>
         </div>
         <form>
             <select name="select1" class="select_action" onchange="showForm(this.value)">

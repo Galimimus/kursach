@@ -39,7 +39,7 @@ function showExercises(str) {
                         <div class="top">
                             <label class="info"><?php echo $_SESSION['student_name'];?></label></br>
                             <label class="info"><?php echo $_SESSION['grade_name'];?></label></br>
-                            <a href="/lk/kursach/index.php" class="exit" onclick="<?php session_destroy();?>" >Выйти</a>
+                            <a href="/lk/kursach/db/logout.php">Выйти</a>
                         </div>
                         <form>
                             <input type="button" value="Задания" class="btn_student_exercises" onclick=showExercises(<?php echo '"'.$_SESSION["grade_name"].'&id='.$_SESSION["student_id"].'"';?>)>

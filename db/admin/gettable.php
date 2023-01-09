@@ -2,7 +2,6 @@
 
 
 include_once '/var/www/html/lk/kursach/db/db_connect.php';
-include_once '/var/www/html/lk/kursach/db/alerts/alerts.php';
 
 switch ($_GET['q']){
     case "1"://subjects 
@@ -10,7 +9,6 @@ switch ($_GET['q']){
         $sql = "SELECT * FROM subjects";
         $result = mysqli_query($link,$sql);
 
-        alert_error($result, "Произошла ошибка при выполнении запроса к таблице subjects");
 
         echo "<table>";
             echo "<tr>";
@@ -35,7 +33,6 @@ switch ($_GET['q']){
         $sql = "SELECT * FROM employees";
         $result = mysqli_query($link,$sql);
 
-        alert_error($result, "Произошла ошибка при выполнении запроса к таблице employees");
 
         echo "<table>";
             echo "<tr>";
@@ -62,7 +59,6 @@ switch ($_GET['q']){
         $sql = "SELECT * FROM grades";
         $result = mysqli_query($link,$sql);
 
-        alert_error($result, "Произошла ошибка при выполнении запроса к таблице grades");
 
         echo "<table>";
         echo "<tr>";

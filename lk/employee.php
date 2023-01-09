@@ -117,14 +117,13 @@ if (str.length == 0) {
 }
 
 
-
 </script>
     </head>
     <body>
                     <div class="split_employee left">
                         <div class="top">
                             <label class="info">Вы вошли как <?php echo $_SESSION['name'];?></label>
-                            <a href="/lk/kursach/index.php" class="exit" onclick="<?php session_destroy();?>">Выйти</a>
+                            <a href="/lk/kursach/db/logout.php" class="exit">Выйти</a>
                         </div>
                         <div class="list_of_subjects">
                         <form>
@@ -149,3 +148,5 @@ if (str.length == 0) {
                     </div>   
   </body>
 </html>
+
+
